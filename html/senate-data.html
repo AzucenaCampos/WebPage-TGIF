@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+  <title>Senate</title>
+  <style > .my-color{background-color: rgba(5, 82, 145, 0.719)} </style>
+</head>
+  <body id= "senate">
+    <div id= "app">
+      <div class = "container">
+        <div class= "row justify-content-between">
+          <div class= "row">
+            <img src="../img/logo.jpg" alt="logo" id="logo" class= "w-25 col-2"></a>
+            <h2 class="col-8 text-right align-self-center">Transparent Government in Fact</h2>
+          </div>
+          <div class= "col-2 text-right align-self-center">
+            <i class="far fa-envelope"></i>
+            <a href="mailto:info@tgif.net"> info@tgif.net</a>
+          </div>   
+        </div>
+        <nav class = "navbar navbar-expand-lg ">
+          <div class= "collapse navbar-collapse my-color" id = "x" >
+            <ul class= "navbar-nav mr-auto">
+              <li class= "nav-item">
+                <a class= "nav-link text-white" href="index.html">Home</a>
+              </li>
+  
+              <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Congress 113
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="house-data.html" role="menuitem">House</a>
+                    <a class="dropdown-item active" href="senate-data.html" role="menuitem">Senate</a>
+                </div>
+              </li>
+  
+              <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Attendance
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="house-attendance.html" role="menuitem">House</a>
+                    <a class="dropdown-item" href="senate-attendance.html" role="menuitem">Senate</a>
+                </div>
+              </li>
+              
+              <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Party Loyalty
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="house-loyalty.html" role="menuitem">House</a>
+                    <a class="dropdown-item" href="senate-loyalty.html" role="menuitem">Senate</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+  
+          <div>
+            <h2>Senators</h2>
+              <p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. 
+                  The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, 
+                  other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
+                
+            <div class= "row">
+              <form action="" onsubmit= "return false" class= "col-7">
+                <label>Filter by Party</label>
+                  <label for= "R"> Republican</label>
+                    <input type="checkbox" name="party" id= "R" value= "R" v-model= "checkedParties" >
+                  <label for= "D"> Democrat</label>
+                    <input type="checkbox" name="party" id= "D" value= "D" v-model= "checkedParties">
+                  <label for= "ID"> Independent</label>
+                    <input type="checkbox" name="party" id= "ID" value= "ID" v-model= "checkedParties">
+              </form>
+  
+              <form action= "" class= "col-3">
+                <label> Filter by State</label>
+                  <select name= "Filter by State" id= "state-filter" v-model= "selectedState">
+                    <option value= "all"> All</option>
+                    <option v-for= "state in states" v-bind:value="state">{{state}}</option>
+                  </select>
+              </form>
+            </div>
+  
+              <table id= "senate-data" class= "table table-hover w-50 mt-4 ml-auto mr-auto"> 
+                <thead>
+                  <tr>
+                    <th>Full Name</th>
+                    <th>Party</th>
+                    <th>State</th>
+                    <th>Seniority</th>
+                    <th>Votes</th>
+                  </tr>
+                </thead>
+                <tbody>  
+                  <tr v-for= "member in filtered">
+                    <td><a :href = "member.url" target= "blank">{{member.first_name}} {{member.middle_name || ""}} {{member.last_name}}</a></td>
+                    <td>{{member.party}}</td>
+                    <td>{{member.state}}</td>
+                    <td>{{member.seniority}}</td>
+                    <td>{{member.votes_with_party_pct}}%</td>
+                  </tr>
+                </tbody>
+              </table>
+          
+          </div>
+        <div class="card text-center">
+          <div class="card-footer text-white my-color">
+            © 2016 TGIF | All Rights Reserved
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>   
+      <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+      <script src="main.js"></script>
+      <script src= "stats.js"></script>       
+</body>
+</html>
